@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloco de notas experimental</title>
+    <style>
+        body {
+            background-color: white;
+        }
+        #txt {
+            border: 0px none;
+            width: 96.4%;
+            height: 95vh;
+            margin-left: 20px;
+            margin-right: auto;
+            background-color: white;
+            resize: none;
+        }
+        textarea:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <textarea name="txt" id="txt"></textarea>
+    <script src="wordlist.js"></script>
+    <script>
+        document.querySelector('#txt').addEventListener('keydown', function(e) {
+            if(e.code == 'Tab') {
+                e.preventDefault();
+                this.value += '    '
+            }
+            if(e.code == 'Space'){
+                var words = this.value.split(' ')
+                var list = new WordList([
+                    "foo",
+                    "bar",
+                    "baz"
+                ]);
+                console.log(list.search(words[words.length - 1]))
+            }
+        })
+        var txt = document.querySelector('#txt')
+        window.onload = function() {
+            document.querySelector('#txt').focus()
+        }
+        document.querySelector('#txt').oninput = function(e) {
+            e.preventDefault();
+            this.style = 'border: none'
+        }
+    </script>
+</body>
+</html>
